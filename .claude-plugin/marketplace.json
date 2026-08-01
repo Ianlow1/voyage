@@ -1,0 +1,25 @@
+{
+  "name": "voyage",
+  "description": "Trip planning that checks its own work — five skills built on a shared verification ledger.",
+  "owner": {
+    "name": "Ian"
+  },
+  "plugins": [
+    {
+      "name": "voyage",
+      "description": "Trip planning that checks its own work. Interview, parallel live research into a sourced dossier, day-by-day itinerary composed only from what was researched, then an adversarial verification pass: every place carries an address, a primary source and an evidence-of-operation date; every day is checked for whether it can physically be walked; every plan is scored against the constraints you actually stated, with failures surfaced at the top rather than buried. Also audits itineraries it did not write, builds packing lists from the real forecast, and repairs plans mid-trip when something breaks.",
+      "author": {
+        "name": "Ian"
+      },
+      "category": "productivity",
+      "source": "./",
+      "keywords": [
+        "travel",
+        "trip-planning",
+        "itinerary",
+        "holiday",
+        "packing"
+      ]
+    }
+  ]
+}
