@@ -26,13 +26,14 @@ most.
 **Line items.** The body of the work. One row per spend, in day order. Columns in
 §2. This is the only sheet where a number is ever typed.
 
-**Bookings.** The reservations tracker from `reservations.md`, as a sheet. Carry
+**Bookings.** The reservations tracker from `reservations.md` §2, as a sheet. Carry
 its columns and its state codes exactly — `[OPEN]`, `[SENT]`, `[DONE]`, `[GONE]`,
 `[LATE]`, `[WAIT]` — so the tracker reads the same
 in the spreadsheet as in the itinerary. Do not invent a second vocabulary for the
 same thing. Add one column the markdown tracker does not need: the line item ID
 (§2), so a booking and its cost are joined. Sorted by deadline, earliest first,
-with passed deadlines flagged loudly per `rules.md` §6.
+with passed deadlines flagged above the table, not inside it, per
+`reservations.md` §6.
 
 **FX.** One rate per currency pair, and nothing else. See §3.
 
@@ -71,7 +72,8 @@ the total they carry.
 
 ## 3. Currency
 
-Per `rules.md`: a foreign amount never loses the form it was quoted in.
+Per `ledger.md` Tier 1, a price carries the currency it was seen in and the date
+it was seen. A foreign amount never loses the form it was quoted in.
 
 **The quoted figure is never overwritten.** `cost pp (quoted)` and
 `currency quoted` are what the traveller will see on the till, on the booking page

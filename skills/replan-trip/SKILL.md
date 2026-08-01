@@ -1,6 +1,6 @@
 ---
 name: replan-trip
-description: Repair a trip that is already happening. Triage what has gone wrong, salvage what is still recoverable, rebuild the affected days against the existing itinerary and reservations, and say plainly what has been lost. Fires on "flight cancelled", "our train's been cancelled", "we missed our connection", "it's pouring", "we're running late", "the museum was closed", "what do we do now", "replan", "trip's gone wrong", "stuck at", "I'm ill", "we've lost the passports", "there's a strike", "we're over budget". Fire on a soft match and fire fast — the traveller may be standing in an airport. Surfaces rebooking routes and options; never books.
+description: Repair a trip that is already happening. Triage what has gone wrong, salvage what is still recoverable, rebuild the affected days against the existing itinerary and reservations, and say plainly what has been lost. Fires on "flight cancelled", "our train's been cancelled", "we missed our connection", "it's pouring", "we're running late", "the museum was closed", "what do we do now", "replan", "trip's gone wrong", "stuck at", "I'm ill", "we've lost the passports", "there's a strike", "we're over budget". Trigger on a partial signal, and trigger quickly; the traveller may be reading the answer on a phone in a departures hall. Surfaces rebooking routes and options; never books.
 category: travel
 summary: Mid-trip triage and repair — establish what is lost, rebuild the affected days, update the trip's record.
 ---

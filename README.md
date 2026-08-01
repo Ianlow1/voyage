@@ -77,10 +77,10 @@ walking tolerance, dietary needs, mobility. Failures appear at the top of the
 document, not buried — because a failure you can see and accept is fine, and one
 you discover in Bergen is not.
 
-**It argues with you.** Twelve cities in ten days, a timed ticket on the day you
-land, the highlight parked on the final day where a storm can take it — these get
-pushed back on once, with the cost named and an alternative proposed. If you still
-want it, you get it, and the trade-off is recorded.
+**It argues with you.** Nine bases in eight nights, a timed ticket on the day you
+land, the highlight parked on the final day where a storm can take it — each of
+these gets one round of pushback, with the cost named and an alternative proposed.
+Hold your ground and you get what you asked for, with the trade-off written down.
 
 **It refuses some things absolutely.** It will never tell you what the visa
 requirement is — it links the official government source and tells you to check.
@@ -101,7 +101,7 @@ Then:
 /voyage:plan-trip
 ```
 
-Or just say what you want — the skills fire on natural phrasing. "Plan a week in
+Or just say what you want — ordinary phrasing is enough to reach them. "Plan a week in
 Norway in September", "is this itinerary realistic?", "what should I pack?",
 "our train's been cancelled".
 

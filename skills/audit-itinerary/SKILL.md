@@ -1,6 +1,6 @@
 ---
 name: audit-itinerary
-description: Run the full verification ledger against any itinerary — one this plugin wrote, one a human wrote, one another AI produced, one pasted out of a tour operator's PDF. Finds the days that cannot physically be walked, the venues that closed, the timed entries with no slack, the constraints the plan quietly broke. Use this whenever a plan already exists and someone wants it checked — a draft, a booking list, a rough day-by-day, even a few lines of prose. Fires on "check this itinerary", "is this plan realistic", "sanity check my trip", "will this work", "review my itinerary", "does this schedule make sense", "did I miss anything in this plan", "audit this", "is this too much for four days", "we've been sent this plan — is it any good". Fire on a soft match; anyone holding a plan and asking for reassurance wants this. If there is no plan yet and the trip is being built from nothing, that is plan-trip, not this. Reports defects first, each with a fix.
+description: Run the full verification ledger against any itinerary — one this plugin wrote, one a human wrote, one another AI produced, one pasted out of a tour operator's PDF. Finds the days that cannot physically be walked, the venues that closed, the timed entries with no slack, the constraints the plan quietly broke. Use this whenever a plan already exists and someone wants it checked — a draft, a booking list, a rough day-by-day, even a few lines of prose. Fires on "check this itinerary", "is this plan realistic", "sanity check my trip", "will this work", "review my itinerary", "does this schedule make sense", "did I miss anything in this plan", "audit this", "is this too much for four days", "we've been sent this plan — is it any good". Lean towards triggering — someone holding a plan and asking whether it holds up wants this, however casually they phrase it. If there is no plan yet and the trip is being built from nothing, that is plan-trip, not this. Reports defects first, each with a fix.
 category: travel
 summary: Adversarial verification of any itinerary against the three-tier ledger, defects first, fixes attached.
 ---
@@ -20,10 +20,11 @@ hierarchy and the refusals. Both override anything here.
 
 You are not reviewing. You are attacking.
 
-> A plausible plan that breaks in the field is a worse outcome than a plan you
-> criticised too harshly. Be skeptical, not validating. Default to flagging.
+> Being too hard on a plan costs the traveller an argument. Waving through a plan
+> that falls apart in Bergen costs them the trip. When the two are in tension,
+> flag.
 
-That sentence is the whole skill. A model asked to check an itinerary drifts
+That trade-off is the whole skill. A model asked to check an itinerary drifts
 towards agreement — it reads the plan, finds it coherent, and says so. Coherent is
 not the same as possible. Assume the plan is wrong somewhere and go looking for
 where, item by item and day by day, with searches rather than recollection. A

@@ -1,6 +1,6 @@
 ---
 name: research-destination
-description: Research a destination properly and hand back a sourced dossier — no itinerary, no dates needed. Use when someone is reading up on a place, weighing one against another, or working out when to go. Fires on "tell me about", "what's X like in [month]", "what's it like in winter", "is it worth going to", "research this destination", "should we go to X or Y", "X or Y for a week", "what's the best time to visit", "is February a bad time for", "help me decide where to go", "what should I know before booking". Fire on a soft match. Produces a dossier with a bibliography and a verdict with a position taken.
+description: Research a destination properly and hand back a sourced dossier — no itinerary, no dates needed. Use when someone is reading up on a place, weighing one against another, or working out when to go. Fires on "tell me about", "what's X like in [month]", "what's it like in winter", "is it worth going to", "research this destination", "should we go to X or Y", "X or Y for a week", "what's the best time to visit", "is February a bad time for", "help me decide where to go", "what should I know before booking". Half a question about a place is enough to trigger it. Produces a dossier with a bibliography and a verdict with a position taken.
 category: travel
 summary: The research lanes without the itinerary — a sourced dossier and a straight answer on where and when.
 ---
@@ -88,7 +88,7 @@ Take a position. "Both are lovely in their own way" is not an answer and rules.m
 
 ## "X or Y?"
 
-Apply the three-positioned-options rule from rules.md § 8. Research both properly
+Apply the shortlist rule from rules.md § 8. Research both properly
 — not one thoroughly and the other from memory, which is the default failure. Same
 lanes, same item standard, same bibliography for each.
 

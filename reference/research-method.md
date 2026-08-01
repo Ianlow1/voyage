@@ -46,7 +46,7 @@ what changes.
 | # | Lane | Owns |
 |---|---|---|
 | 1 | Transport & logistics | Getting there, moving about, transfer times, booking horizons |
-| 2 | Lodging | Neighbourhoods, three options, what is included, what it really costs |
+| 2 | Lodging | Neighbourhoods, a short candidate list, what is included, what it really costs |
 | 3 | Food | Named places, lead times, price bands, market days, dietary reality |
 | 4 | Things to do & timing | What to book when, when to go, what shuts, what rain kills |
 | 5 | Weather, clothing & seasonality | Normals, forecast, daylight, kit |
@@ -78,9 +78,11 @@ with a twenty-minute walk between platforms.
 ### Lane 2 — Lodging
 
 **Establish.** Which neighbourhoods suit *this* traveller, with a position stated
-on each rather than a neutral survey. Then **three options, not ten**, per
-rules.md § 8. What is included: breakfast, lift, kitchen, laundry, aircon,
-parking. City or tourist tax, almost always charged on top and often in cash.
+on each rather than a neutral survey. Then **cut the candidates to two or three
+and say which one you would take** — `rules.md` § 8 asks you to narrow hard and
+then commit, not to hand back a long list. What is included: breakfast, lift,
+kitchen, laundry, aircon, parking. City or tourist tax, almost always charged on
+top and often in cash.
 Cancellation terms, and the date the free window closes.
 
 **Search.** `[city] where to stay [traveller type]` · `[neighbourhood] at night` ·
@@ -91,7 +93,7 @@ which the tourism board publishes. Below-the-line sources are fine for
 neighbourhood *texture*, labelled as such, and never for a price or a policy.
 
 **Returns.** Two or three neighbourhoods, each with one line on who it suits and
-one on the trade-off. Three properties as item blocks (§ 6), with a named
+one on the trade-off. Two or three properties as item blocks (§ 6), with a named
 recommendation and the reason. State the total for the stay, not the nightly rate,
 and state what the tax adds.
 
@@ -230,8 +232,8 @@ daylight or a seasonal closure.
 Two exceptions, both narrow. If food is the traveller's stated lens, run food as
 a deliberately narrow fifth pass: the one or two places that need booking now,
 and a no-reservation fallback for each area. If the traveller still has to choose
-where to sleep, run lodging too, narrowed to one neighbourhood and one
-recommendation rather than three positioned options.
+where to sleep, run lodging too, narrowed to a single neighbourhood and a single
+property rather than the two-or-three shortlist `rules.md` § 8 normally wants.
 
 Whatever you drop, **say so at the top of the dossier and again in the delivered
 plan**: which lanes ran, which did not, and what the traveller should therefore
@@ -279,7 +281,7 @@ Five things that change the shape of the trip: deadlines already tight, closures
 inside the dates, anything meaning the brief needs revisiting.
 
 ## 1. Transport & logistics   [leg table] [awkward-connection notes]
-## 2. Lodging                 [neighbourhoods positioned] [3 item blocks] [the one I'd take]
+## 2. Lodging                 [neighbourhoods positioned] [2–3 item blocks] [the one I'd take]
 ## 3. Food                    [item blocks by band] [market days] [diet] [speciality verdict]
 ## 4. Things to do & timing   [anchor candidates + 3 fallbacks each] [weekday closure table]
 ## 5. Weather & seasonality   [normals] [forecast, dated, or "outside range"] [daylight] [kit]
@@ -341,7 +343,7 @@ tier-marked against rules.md § 5.
 ```
 [T4] Vy — Bergen Line timetable
      https://www.vy.no/...
-     Supports: Oslo S 08:25 → Bergen 15:27 daily; seat reservation compulsory
+     Supports: Oslo S 08:25 → Bergen 14:59 daily; seat reservation compulsory
      Checked: 2026-08-01
 
 [B]  Below-the-line food blog
@@ -401,7 +403,8 @@ Stop and correct if you catch yourself about to:
 - Cite an aggregator for an opening time, a timetable or a booking horizon
 - Smooth over a disagreement between two sources instead of recording it
 - Return prose that reads well and contains no addresses, prices or URLs
-- Give ten options where rules.md asks for three with a position taken
+- Return a long list of candidates when `rules.md` § 8 wants it cut to two or
+  three with one of them backed
 - Run six lanes sequentially and not mention that they went shallow
 - Let a `LOW` item through with a caveat attached
 - Sketch a day

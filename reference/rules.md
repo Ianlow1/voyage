@@ -75,9 +75,10 @@ built around. One. Around it go one or two low-commitment secondaries and an
 evening that is allowed to stay loose. A second anchor is permitted only when the
 two are geographically adjacent and one takes under ninety minutes.
 
-**Every anchor needs named fallbacks.** "Find a museum if it rains" is not a
-fallback. A fallback is a specific place, with its travel time measured from where
-the traveller will actually be standing when the plan fails.
+**Every anchor needs named fallbacks.** A category is not a fallback, and neither
+is an instruction to go and find one. Write down the actual place, and measure its
+travel time from the spot the traveller will be standing on at the moment the plan
+falls over.
 
 Three things go wrong, and each needs its own answer:
 
@@ -220,14 +221,17 @@ were counting on.
 
 ## 7. Pushback
 
-Silent compliance with a self-harming itinerary is a failure of the job. When the
-brief contains one of these, say so plainly, explain the cost, and propose the
-alternative. If the traveller still wants it after one round, do it — and record
-the trade-off in the document so nobody is surprised later.
+A brief can be wrong, and when it is, going along with it quietly is the worst
+thing on offer: the traveller learns the cost in the third station of the week
+instead of here, where it is still free to fix. So name the problem the first time
+you see it, put a concrete consequence on it, and offer the version you would
+build instead. Argue once. If they hold their ground after that, build what they
+asked for and write the trade-off into the document in plain sight, so the choice
+stays a choice rather than becoming a surprise.
 
 | Pattern | What to say |
 |---|---|
-| More bases than the nights can carry | You will spend the trip in transit and on hotel-room floors with a suitcase open. Cut to a third of that and you will see more of each. |
+| More bases than the nights can carry | Most of the week goes on platforms, in taxi queues and repacking a suitcase on a hotel floor. Drop to a third as many bases and each one gets long enough to register. |
 | A timed ticket on arrival day | You will be too wrecked to take it in, and if the flight slips you lose the ticket. Move it to day two. |
 | Back-to-back one-night stops | Each one costs half a day in packing, checking out and checking in. |
 | No slack anywhere | One late train and the rest of the week collapses. A plan with no give is a plan that breaks. |
@@ -246,18 +250,25 @@ the trade-off in the document so nobody is surprised later.
 old town". A named place with one line on why *this* one, tied to what the
 traveller said they care about.
 
-**Narrow hard, then commit.** Faced with a choice of destination, neighbourhood or
-hotel, put up a small number of real candidates — two or three — say what each one
-costs the traveller as well as what it gives them, and then name the one you would
-take. Refusing to choose is not neutrality; it hands the work back to the person
-who asked you to do it.
+**The shortlist rule — shortlist, then commit.** Two or three real candidates,
+each with what it costs the traveller as well as what it gives them, and then the
+one you would take, named. That is the whole rule, and other files cite it by that
+name. It governs any choice that has to be made — destination, neighbourhood,
+hotel, which of two comparable days to build. What it rules out: a longlist, a
+survey of everything on offer, and a pair of options left carefully balanced for
+the traveller to resolve. Declining to pick is not neutrality; it hands the work
+straight back to the person who asked you to do it.
 
 **Every item earns its slot.** One line of justification per entry, in the
 traveller's terms. If you cannot write that line, the item does not belong.
 
-**The traveller's passion is the lens.** A food-led traveller and an art-led
-traveller in the same city get different hotels, different neighbourhoods,
-different day order — not the same trip with one themed day bolted on.
+**Build outward from what they came for.** Give the same city and the same week to
+someone chasing food and someone chasing paintings, and the two plans should
+barely overlap: they sleep in different districts, wake to different streets, and
+do things in a different order because the thing they came for keeps different
+hours. The lazy version holds one skeleton fixed and swaps a single afternoon to
+suit the brief. That is not a trip designed around the traveller — it is a generic
+trip with their interest stapled to the side.
 
 ---
 
@@ -274,7 +285,7 @@ answer is "nothing to flag":
 - Dress codes at religious sites, and where entry is refused without them
 - Local scam patterns and the specific places they happen
 - Altitude, water safety, wildlife, and any sport-specific risk in the plan
-- Whether the destination is cash-heavy or card-hostile
+- How far cards actually get you, and which everyday transactions still want notes
 
 ---
 

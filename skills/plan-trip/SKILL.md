@@ -1,6 +1,6 @@
 ---
 name: plan-trip
-description: Build a trip from nothing — interview, live research, day-by-day itinerary, budget sheet, and a verification pass that checks the days are physically possible before handing them over. Reach for this when someone wants a trip designed or shaped. Natural phrasings that mean this skill - "plan a trip", "plan a holiday", "plan our honeymoon", "build me an itinerary", "itinerary for", "we're going to X in March", "where should we go", "got a week off", "long weekend in", "help me plan", "road trip", "family trip", "bucket list trip". A vague travel intent is enough to start; do not wait for a fully-formed request. For checking an itinerary that already exists, use audit-itinerary instead. Delivers a sourced itinerary and a booking tracker; HTML and PDF only when asked for.
+description: Build a trip from nothing — interview, live research, day-by-day itinerary, budget sheet, and a verification pass that checks the days are physically possible before handing them over. Reach for this when someone wants a trip designed or shaped. Natural phrasings that mean this skill - "we're going to X in March", "long weekend in", "plan a trip", "what should we do with five days in", "road trip", "help me plan", "got a week off", "where should we go", "sort out our two weeks in", "family trip", "build me an itinerary". Trigger on the first hint of travel intent — the brief gets built during the interview, not before it. For checking an itinerary that already exists, use audit-itinerary instead. Delivers a sourced itinerary and a booking tracker; HTML and PDF only when asked for.
 category: travel
 summary: Six-phase trip planning — interview, pushback, parallel research, compose, verify, deliver.
 ---
@@ -47,7 +47,8 @@ should shape the whole trip, and it is the one question a form cannot ask.
 Then a single consolidated round. Ask everything at once — do not drip-feed
 questions across six turns. Skip anything they have already told you.
 
-- **Where from** — home airport or city, so transit and flight pricing are real
+- **Where from** — the airport or city they set off from; without it, transit times
+  and flight prices are guesswork
 - **When** — firm dates, a flexible window, or open. If flexible, say so; you may
   recommend a shift.
 - **Who** — how many, ages, mobility, fitness, anyone with a condition that shapes
@@ -83,7 +84,8 @@ parts go with the trip.
 Before spending a single search, hold the brief up against the pushback table in
 `rules.md`.
 
-If the brief contains a self-inflicted problem — too many bases for the nights,
+If the brief carries a problem the traveller has built for themselves — too many
+bases for the nights available,
 a ticket booked on arrival day, the highlight parked on the final day, peak season
 when the shoulder is better, a national shutdown falling inside the dates — say so
 now. Name the cost in concrete terms and propose the specific alternative.
@@ -187,9 +189,9 @@ Stop and correct if you catch yourself about to:
 
 - Name a restaurant, hotel or museum without having searched for it in this session
 - Write "a good local spot", "explore the area", or any placeholder standing in for a decision
-- Produce a list of ten options instead of three with a position
+- Hand over a longlist rather than the shortlist rule's two or three with a recommendation attached
 - Put a timed ticket on arrival day
-- Fill every block of every day
+- Leave no hour of any day unassigned
 - State a visa, vaccination or customs rule as fact
 - Write an opening time as a bare fact rather than a confirm-before-you-go field
 - Carry a `LOW` confidence item into the document with a hedge instead of dropping it

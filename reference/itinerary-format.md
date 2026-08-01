@@ -123,7 +123,7 @@ Tier 1.
 | Official URL | The venue's or operator's own site. Never a reseller or aggregator |
 | Time | Four numbers: `transit raw + buffer · queue · visit` and the block total |
 | Price | Per person, range, currency, date seen |
-| Booking | State code per `reservations.md`, and the deadline if one exists |
+| Booking | State code per `reservations.md` § 3, and the deadline if one exists. A walk-up with nothing to book takes `[N/A]` and no deadline |
 | Confidence | `HIGH` / `MEDIUM` per `ledger.md`. `LOW` items are dropped, not hedged |
 
 Rendered:
@@ -165,18 +165,20 @@ line, not a second museum across the city.
 
 **Every anchor carries three named backups** — one for each of the three ways a
 day fails, per `rules.md` § 3: the weather turns, the party runs out of road, the
-door is shut. Each is a real place, verified to the same standard as the anchor
-itself, and each carries its travel time *from where the traveller will actually
-be standing* when the plan fails — not from the hotel.
+door is shut. Label them `weather`, `stamina` and `closed-door`, in those words,
+because that is the set `ledger.md` Tier 2 counts and the render lays out. Each is
+a real place, verified to the same standard as the anchor itself, and each carries
+its travel time *from where the traveller will actually be standing* when the plan
+fails — not from the hotel.
 
 ```
 Backup · weather: Fantoft stavkyrkje is outdoors and pointless in horizontal rain.
   Swap to KODE 3 (Rasmus Meyer collection) — Bybanen back to Nonneseter, 18 min,
   covered, and the Munch rooms are the reason you came to Bergen anyway.
-Backup · energy: drop the afternoon entirely. Bybanen to Byparken, 25 min, hotel,
+Backup · stamina: drop the afternoon entirely. Bybanen to Byparken, 25 min, hotel,
   and move dinner from 20:00 to 18:30.
-Backup · closure: if the recital is cancelled the house and grounds still open —
-  or Siljustøl, Harald Sæverud's house, 15 min further out on the same line.
+Backup · closed-door: if the recital is cancelled the house and grounds still
+  open — or Siljustøl, Harald Sæverud's house, 15 min further out on the line.
 ```
 
 "Find something indoors" is not a backup. If you cannot name it, you have not done
@@ -366,7 +368,7 @@ to door with the 57 min of Bybanen and walking above
 Price: NOK 160–200 pp house and grounds; recital ticket separate, NOK 250–300 pp
 (seen 2026-08-01) · → Annex B, line 14
 Booking: `[OPEN]`. Recital seating is capped and the season timetable changes
-in September — **book by Friday 4 September 2026** → Annex A #7
+in September — **book by Friday 4 September 2026** → Annex A #6
 Confidence: HIGH · evidence 2026 · address confirmed
 Hours and recital times: confirm before you go → https://kodebergen.no/troldhaugen
 
@@ -375,12 +377,19 @@ Hours and recital times: confirm before you go → https://kodebergen.no/troldha
 > Meyer collection) — from the villa, 20 min walk down to Hop, Bybanen Hop →
 > Nonneseter 20 min, then 6 min covered walk. Roughly 50 min door to door, and
 > indoors from the platform onwards.
-> **Backup · energy:** from the villa, 20 min down to Hop, then Bybanen Hop →
+> **Backup · stamina:** from the villa, 20 min down to Hop, then Bybanen Hop →
 > Byparken 22 min + 8 buffer — about 50 min to the hotel door, and the afternoon
 > is deleted. Move dinner from 20:00 to 18:30 and eat early.
-> **Backup · closure:** if the recital is off, Siljustøl — Harald Sæverud's house
-> — is 15 min further out on the same line and open the same afternoons.
+> **Backup · closed-door:** if the recital is off, Siljustøl — Harald Sæverud's
+> house — is 15 min further out on the same line and open the same afternoons.
 > https://kodebergen.no/siljustol
+
+**14:45 · Walk back down to Hop** · transit
+20 min + 7 buffer, on the platform at 15:12. Same path as the climb, reversed, and
+timed at the same 20 min rather than shaded down for the gradient — map apps run
+optimistic downhill as well. The 53 min before the next block is uncommitted on
+purpose: that is where a coffee at the stop or ten more minutes in the grounds
+comes from, not out of the recital.
 
 **16:05 · Fantoft stavkyrkje** · secondary, and the first thing to cut
 Why this one: it is a twelve-minute stop on the line you are already on, and after
@@ -405,7 +414,7 @@ from the hotel, in the old power-station building next to KODE.
 Rasmus Meyers allé 9, 5015 Bergen · https://www.lysverket.no
 Time: walk 10 min + 4 buffer · 2h00 → 2h14
 Price: NOK 600–850 pp food, excluding drinks (seen 2026-08-01) · → Annex B, line 22
-Booking: `[OPEN]` · **book by Tuesday 2 September 2026** → Annex A #9
+Booking: `[OPEN]` · **book by Wednesday 2 September 2026** → Annex A #7
 Cancellation: confirm terms at booking; some Bergen kitchens hold a card
 Confidence: HIGH · evidence 2026
 Hours: confirm before you go → https://www.lysverket.no
@@ -415,16 +424,18 @@ Hours: confirm before you go → https://www.lysverket.no
 > the exciting one, which is the point of a fallback.
 > https://www.pingvinen.no
 
-**Day total:** 6h50 of transit, queue and visit inside an 11h window, 08:00–19:00,
+**Day total:** 7h17 of transit, queue and visit inside an 11h window, 08:00–19:00,
 before dinner. The arithmetic: 1h21 funicular block + 47 min walk down + 57 min
-Bybanen and climb + 2h15 on site at Troldhaugen + 56 min Fantoft block + 34 min
-back to the hotel = 410 min. That leaves 4h10 of the window uncommitted, which is
-the point.
+Bybanen and climb + 2h15 on site at Troldhaugen + 27 min walk back down to Hop +
+56 min Fantoft block + 34 min back to the hotel = 437 min. That leaves 3h43 of the
+window uncommitted, which is the point.
 
-**Walking total:** 2h07 on foot, buffers included — 13 min to the funicular, 47
-down from Fløyen to Bryggen, 27 uphill from Hop to the villa, 17 at Fantoft, 9 to
-the hotel, 14 to dinner. Stated separately from the 6h50 because a walking limit
-is scored against this number and cannot be read out of the day total.
+**Walking total:** 2h34 on foot, buffers included — 13 min to the funicular, 47
+down from Fløyen to Bryggen, 27 uphill from Hop to the villa, 27 back down to Hop,
+17 at Fantoft, 9 to the hotel, 14 to dinner. Stated separately from the 7h17
+because a walking limit is scored against this number and cannot be read out of
+the day total: more than a third of this day is on foot, and the return leg down
+to Hop is exactly the sort of thing a day total swallows.
 
 **Slack:** measured gross throughout this document — from the end of one timed
 entry to the start of the next, transit included, per `ledger.md` Tier 2. Between
@@ -446,8 +457,9 @@ noted for later.
 
 - [ ] Day type stated in the header, and the day built to that type's template
 - [ ] Exactly one anchor — zero on arrival and departure, one on a move day
-- [ ] Anchor has three named backups: weather, energy, closure — each with travel
-      time from where the traveller will actually be
+- [ ] Anchor has three named backups, labelled `weather`, `stamina` and
+      `closed-door` — each with travel time from where the traveller will
+      actually be
 - [ ] Every item has a name, an address, an official URL and a confidence tag
 - [ ] Every item has a "why this one" line that could not be said of anywhere else
 - [ ] No `LOW` confidence item survives on the page

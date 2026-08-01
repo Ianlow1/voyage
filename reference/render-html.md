@@ -103,9 +103,10 @@ Two schemes, one set of custom properties, swapped at the `:root` level.
 | `--warn-bg` | `#FCE9E7` | `#3A1D1B` | ledger failure banner |
 | `--warn-text` | `#8C1D14` | `#F5B3AC` | ledger failure text |
 
-`--text` on `--bg` clears 13:1 in light and 12:1 in dark. `--text-dim` on
-`--surface` clears 5.6:1 and 6.1:1. `--accent` on `--surface` clears 4.6:1 and
-7.4:1. If you change a value, re-check the pair — do not assume.
+`--text` on `--bg` clears 15.6:1 in light and 15.2:1 in dark. `--text-dim` on
+`--surface` clears 6.7:1 in both. `--accent` on `--surface` clears 5.3:1 and
+7.4:1. If you change a value, re-check the pair — do not assume, and do not carry
+a stated ratio across from an earlier palette.
 
 ### Day pins
 
@@ -143,8 +144,9 @@ carried beside the day colour in the script — never a blanket `color:#fff` on
 
 **Every pin carries its day number as text.** Colour alone fails for the ~8% of
 men with red–green deficiency — days 1 and 6 are the collision. Use a Leaflet
-`divIcon` with the numeral inside, on the day colour, with a 2px white outer ring
-in light mode and a `#12141A` ring in dark. The ring separates the pin from the
+`divIcon` with the numeral inside, on the day colour, with a 2px outer ring in
+`var(--surface)` — white in light, `#1B1E26` in dark. One token, so the ring
+follows the theme without a second rule. The ring separates the pin from the
 tile; the numeral colour above is what makes the number readable. The number is
 what makes the map legible; the colour is the shortcut.
 
@@ -176,9 +178,20 @@ filtered tiles read badly for that particular geography.
 
 Leaflet 1.9.4 from cdnjs, OSM tiles, no API key.
 
-- `L.map('map')` then `fitBounds` over every stop that has coordinates, padding
-  `[36, 36]`. Do not hardcode a centre and zoom — a hardcoded view is wrong the
-  moment the itinerary changes.
+- **Filter to plottable stops once, before anything touches the map.** A stop may
+  legitimately have no coordinates (§1), and `L.marker([undefined, undefined])`
+  throws. Because markers, polylines and `fitBounds` all run inside one `try`, a
+  single incomplete stop would otherwise take the entire map down — no pins, no
+  routes, no bounds. So derive one list, `PLOTTABLE`, with
+  `Number.isFinite(s.lat) && Number.isFinite(s.lng)`, and build every map layer
+  from that. This is deliberate, not a silent drop: the excluded stops still
+  appear in full in the day list below the map, and the map status line says how
+  many were left off.
+- `L.map('map')` then `fitBounds` over `PLOTTABLE`, padding `[36, 36]`. Do not
+  hardcode a centre and zoom — a hardcoded view is wrong the moment the itinerary
+  changes. With one plottable stop `fitBounds` snaps to maximum zoom, so
+  `setView` at a readable zoom instead; with none, skip the map layers and say so
+  on the status line.
 - **`#map` is empty in the markup.** Leaflet appends its panes to the container
   and never clears it, so a "Loading map…" child is not replaced — it sits on top
   of the tiles for the life of the page. Any loading or failure text is a sibling
@@ -196,8 +209,10 @@ Leaflet 1.9.4 from cdnjs, OSM tiles, no API key.
 - Clicking a day card header pans and zooms to that day's bounds. Clicking a stop
   row opens its popup.
 - Map height: `320px` at 375px wide, `420px` at 768px, `520px` at 1440px.
-- Stops with no coordinates are still listed in the day card; they simply have no
-  pin. Say so in the card rather than silently dropping them.
+- Stops with no coordinates are still listed in the day card, in sequence, with
+  everything §8 requires; they simply have no pin. Say so in the card rather than
+  silently dropping them, and never let a missing coordinate cost the traveller
+  the stop.
 
 ---
 
@@ -205,10 +220,16 @@ Leaflet 1.9.4 from cdnjs, OSM tiles, no API key.
 
 A `<details>` element per day, or a button-plus-region pair with proper `aria`.
 Header shows: day number, date and weekday, base city, the day type, the day's
-theme, the energy level, the day's anchor, the day's walking total. All of them
-come straight from the day header in `itinerary-format.md` § 4 — the theme,
-energy and weather note are what let a traveller judge a day at a glance without
-opening it, which is the whole job of a collapsed card.
+theme, the energy level, the day's anchor, the day's walking total, and the
+weather note. All of them come straight from the day header in
+`itinerary-format.md` § 4 — the theme, energy and weather note are what let a
+traveller judge a day at a glance without opening it, which is the whole job of a
+collapsed card.
+
+**The weather note goes in the summary, not the body.** It is the field that
+decides whether the day happens as written, so it cannot sit behind a disclosure
+the traveller has to open first. Verbatim from the day header, checked date
+included.
 
 **Auto-expand the current day if the trip is in progress.** Compare `new Date()`
 against the trip dates in JS at load. Trip not started or already finished: all
@@ -220,9 +241,7 @@ Each day card contains, in order:
 
 1. The day's shape in one line — the stated day type and theme, carried across
    from the itinerary header: arrival day, transit day, decompression day
-2. The weather note, verbatim from the day header, including the checked date.
-   It is the field that decides whether the day happens as written
-3. The **checks line** — a compact badge row showing that the two Tier 2 day
+2. The **checks line** — a compact badge row showing that the two Tier 2 day
    checks ran and what they returned: `Weekday closures · Wednesday: clear` and
    `Geography · one line out and back, no doubling`. Both are checked in
    `ledger.md` Tier 2 and specced in `itinerary-format.md`, and neither is
@@ -231,8 +250,8 @@ Each day card contains, in order:
    per check, in dim meta text — it is reassurance, not a headline. Where a check
    carries a specific worry, that worry is the line: `Weekday closures · Monday:
    KODE 3 shut, day built outdoors for that reason`
-4. Stops, in sequence
-5. The day's named backups — all four that `ledger.md` Tier 2 requires, each
+3. Stops, in sequence
+4. The day's named backups — all four that `ledger.md` Tier 2 requires, each
    labelled by the failure it answers: **weather** (indoor or sheltered
    substitute), **stamina** (what to cut, and where they sit down instead),
    **closed door** (substitute for a strike, renovation, private hire or missed
@@ -242,7 +261,7 @@ Each day card contains, in order:
    card says which place it is measured from. If any of the four is missing the
    itinerary is incomplete, not the render — go back and fix the itinerary rather
    than rendering three and hoping
-6. The route button and QR
+5. The route button and QR
 
 ---
 
@@ -289,6 +308,10 @@ ever.
 - `alt` text describing the place, not the word "photo"
 - No image is load-bearing. Every stop must read completely with all images
   failed.
+- **Where research sourced no photograph, omit the `<img>` and its credit line
+  altogether.** Do not ship the skeleton's image element with an unfilled
+  placeholder in `src`: it resolves to nothing, 404s, and fires the fallback for a
+  photograph that never existed. §1 applies — render the gap or omit the field.
 
 ---
 
@@ -369,8 +392,14 @@ genuinely not embedded an encoder — and the page must declare it.
 Free, no key, but it is a third-party request that can be blocked or can
 disappear.
 
-**Final fallback: the link alone.** A visible, tappable, copyable URL under the
-route button.
+**Final fallback: the link alone.** A visible, tappable, copyable URL written into
+the QR container itself. This one is not optional and it is not conditional: if no
+inline encoder is embedded and `ALLOW_EXTERNAL_QR` is false — which is the default,
+and therefore the common case — the first two branches never run, and a container
+that only ever holds a QR ships empty. §17 forbids that. So the chain ends in an
+unconditional `else` that writes the route URL as text, and the external branch
+falls back to the same text when the image fails to load rather than deleting the
+container. Whatever happens, the container holds something.
 
 Say plainly in the page which of the three you used. "QR generated inline" or
 "QR served by api.qrserver.com — needs a connection" or "QR unavailable, use the
@@ -393,7 +422,9 @@ readable itinerary as text.
   map container, not inside it — Leaflet appends to `#map` without clearing what
   is already there, so a placeholder child stays visible on top of the tiles.
   Hide the line on the tile layer's `load` event and rewrite it to the failure
-  text if the tiles have not arrived within a few seconds.
+  text if the tiles have not arrived within a few seconds. The one case where it
+  stays visible after a clean load is the §6 coordinate exclusion: if any stop
+  could not be pinned, the line says how many and points at the day cards.
 - Images fall back per §9.
 - No content is injected by fetch. Everything is in the file at build time.
 - Addresses and phone numbers are text in the document, not only inside popups —
@@ -477,9 +508,14 @@ the styling here as finished design.
   :focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
   .skip { position:absolute; left:-9999px; }
   .skip:focus { left:8px; top:8px; padding:12px; background:var(--surface); z-index:9999; }
+  /* inline-flex, not the default inline: min-height does nothing to an inline
+     <a>, and .btn goes on links — the route button and the photo fallback.
+     Without this the route button measures 39px and misses §2's 44px. */
   button,.btn { min-height:var(--tap); min-width:var(--tap); font:inherit; padding:10px 16px;
+                display:inline-flex; align-items:center; justify-content:center;
                 border:1px solid var(--border); border-radius:var(--radius);
-                background:var(--surface); color:var(--text); cursor:pointer; }
+                background:var(--surface); color:var(--text); cursor:pointer;
+                text-decoration:none; }
 
   .wrap { max-width:100%; padding:16px; }
   #map { height:320px; border-radius:var(--radius); background:var(--surface-2); }
@@ -500,6 +536,9 @@ the styling here as finished design.
          border-radius:var(--radius); margin:12px 0; }
   .day > summary { min-height:var(--tap); padding:14px 16px; cursor:pointer;
                    list-style:none; font-weight:600; }
+  /* Summary metadata stacks — the weather note lives here, on the collapsed
+     card, because it is what decides whether the day happens as written (§7). */
+  .day > summary .meta { display:block; font-weight:400; margin-top:2px; }
   .stop { border-top:1px solid var(--border); padding:14px 16px; }
   .stop h3 { margin:0 0 4px; font-size:1rem; }
   .stop img { width:100%; height:auto; border-radius:8px; }
@@ -512,6 +551,16 @@ the styling here as finished design.
                padding:4px 10px; font-size:.8125rem; color:var(--text-dim); }
   .sources { background:var(--surface-2); border-radius:8px; padding:8px 12px;
              margin-top:10px; font-size:.85rem; }
+  /* The sources disclosure is an interactive element too — a bare <summary> is
+     one line tall and fails the 44px rule the day header already meets. */
+  .sources > summary { min-height:var(--tap); display:flex; align-items:center;
+                       cursor:pointer; }
+  /* The QR box always ends up holding something — an SVG, an image, or the
+     route URL as tappable text (§12). It is never left empty. */
+  .qr { margin:10px 0; }
+  .qr svg, .qr img { display:block; width:180px; height:180px; }
+  .qr-link { display:inline-flex; align-items:center; min-height:var(--tap);
+             font-size:.8125rem; word-break:break-all; }
   .ledger-fail { background:var(--warn-bg); color:var(--warn-text);
                  border-radius:var(--radius); padding:14px 16px; }
   .emergency { position:sticky; bottom:0; background:var(--surface);
@@ -579,9 +628,11 @@ function mapFallback(url, name) {
       <h2>Day 1 · [WEEKDAY] [DATE] · [BASE_CITY]</h2>
       <span class="meta">[DAY_TYPE] · [THEME] · energy [LOW|MEDIUM|HIGH]</span>
       <span class="meta">Anchor: [ANCHOR] · walking [WALKING_TOTAL]</span>
+      <!-- Inside the summary, not below it: the weather note is what decides
+           whether the day happens as written, so it has to be legible on a
+           collapsed card (§7). -->
+      <span class="meta">Weather: [WEATHER_NOTE] (checked [DATE])</span>
     </summary>
-
-    <p class="meta">Weather: [WEATHER_NOTE] (checked [DATE])</p>
 
     <!-- Tier 2 checks. Neither result appears anywhere else on the page. -->
     <ul class="checks">
@@ -594,6 +645,12 @@ function mapFallback(url, name) {
       <p class="meta">[TYPE] · [TIME_BLOCK] · [PRICE_PP]</p>
       <p class="timebreak">transit [T] + buffer [B] + queue [Q] + visit [V] = [TOTAL]</p>
       <p>[WHY_THIS_ONE]</p>
+      <!-- Only where the stop has no coordinates. It keeps its place in the day,
+           it simply has no pin (§6). -->
+      <p class="meta">Not pinned on the map — no coordinates for this stop. The
+        address and directions link below still work.</p>
+      <!-- Photo and credit: omit both entirely where research found no
+           photograph. Do not ship the element with the placeholder in src (§9). -->
       <img src="[PHOTO_URL]" alt="[DESCRIPTION]" loading="lazy"
            width="800" height="533"
            onerror="this.replaceWith(mapFallback('[MAPS_PIN_URL]','[STOP_NAME]'))">
@@ -650,50 +707,88 @@ const DAY_INK     = ['#FFFFFF','#0B0D12','#0B0D12','#0B0D12',
                      '#FFFFFF','#0B0D12','#FFFFFF','#0B0D12'];
 
 // [{lat,lng,name,day,type,time,price,url,mapsUrl}] — from the itinerary only.
+// lat and lng may be absent: §1 allows a stop with no coordinates, and §6 keeps
+// it in the day card regardless.
 const STOPS = [];
 const DAY_LABELS = {};              // { 1:'Mon 4 May · Oslo', ... }
 const DAY_ROUTES = {};              // { 1:'[GOOGLE_MAPS_DAY_URL]', ... }
 const TRIP = { start:'[ISO_START]', end:'[ISO_END]' };
 const ALLOW_EXTERNAL_QR = false;    // true only if you took the §12 fallback
 
+// Every map layer is built from this list, never from STOPS directly.
+// L.marker([undefined, undefined]) throws, and markers, polylines and fitBounds
+// share one try — so a single stop without coordinates would otherwise cost the
+// whole map. Excluded stops are still rendered in full in the day cards.
+const PLOTTABLE = STOPS.filter(s => Number.isFinite(s.lat) && Number.isFinite(s.lng));
+const UNPLOTTED = STOPS.length - PLOTTABLE.length;
+// Day number drives colour and grouping; fall back to 1 rather than indexing
+// DAY_COLOURS with NaN and painting a pin "undefined".
+const dayIndex = s => ((Number(s.day) || 1) - 1) % DAY_COLOURS.length;
+
 function setTheme(next) {
   theme = next;
   document.documentElement.setAttribute('data-theme', next);
   const b = document.getElementById('theme');
+  if (!b) return;                   // one missing element must not kill the script
   b.setAttribute('aria-pressed', String(next === 'dark'));
   b.textContent = next === 'dark' ? 'Light mode' : 'Dark mode';
 }
-document.getElementById('theme').addEventListener('click',
+const themeBtn = document.getElementById('theme');
+if (themeBtn) themeBtn.addEventListener('click',
   () => setTheme(theme === 'dark' ? 'light' : 'dark'));
 setTheme(theme);
 
 // Expand today's card if the trip is running; otherwise day 1.
 (function openCurrentDay(){
-  const today = new Date().toISOString().slice(0,10);
+  // Local date, assembled by hand. toISOString() is UTC, which opens the wrong
+  // card for a traveller standing in Tokyo in the morning.
+  const now = new Date();
+  const today = now.getFullYear() + '-'
+    + String(now.getMonth() + 1).padStart(2,'0') + '-'
+    + String(now.getDate()).padStart(2,'0');
   const inTrip = today >= TRIP.start && today <= TRIP.end;
   const n = inTrip
-    ? Math.floor((Date.parse(today) - Date.parse(TRIP.start)) / 86400000) + 1
+    ? Math.round((Date.parse(today) - Date.parse(TRIP.start)) / 86400000) + 1
     : 1;
   const el = document.getElementById('day-' + n);
   if (el) { el.open = true; if (inTrip) el.scrollIntoView(); }
 })();
 
-// Day legend. The element exists in the markup, so it must be filled here —
-// an empty #legend is a missing feature, not a decoration.
+// Day legend — one swatch per day that actually appears on the map, so it is
+// built from PLOTTABLE. An empty #legend is a missing feature, not a
+// decoration; with nothing to show, remove it rather than ship an empty list.
 (function buildLegend(){
   const el = document.getElementById('legend');
-  const days = [...new Set(STOPS.map(s => s.day))].sort((a,b) => a - b);
+  if (!el) return;
+  const days = [...new Set(PLOTTABLE.map(s => Number(s.day) || 1))].sort((a,b) => a - b);
+  if (!days.length) { el.remove(); return; }
   el.innerHTML = days.map(d =>
     '<li><i style="background:' + DAY_COLOURS[(d - 1) % DAY_COLOURS.length] + '"></i>'
     + 'Day ' + d + (DAY_LABELS[d] ? ' · ' + DAY_LABELS[d] : '') + '</li>').join('');
 })();
 
 // QR per day (§12). Inline encoder if one is embedded above, then the external
-// service only when explicitly allowed, then the link alone — and the page says
-// which of the three ran.
+// service only when explicitly allowed, then — unconditionally — the link as
+// text. The default page has no encoder and ALLOW_EXTERNAL_QR false, so that
+// last branch is the common case, not an edge case: without it every QR box
+// ships empty and §17 is broken.
 (function buildQRs(){
-  let method = 'QR unavailable — use the route link';
-  Object.keys(DAY_ROUTES).forEach(d => {
+  const LINK_ONLY = 'QR unavailable — the full route link is printed under the button';
+  const days = Object.keys(DAY_ROUTES);
+  let method = days.length ? LINK_ONLY : 'The route link above works without the QR.';
+
+  function linkOnly(el, url) {
+    el.textContent = '';
+    const a = document.createElement('a');
+    a.className = 'qr-link';
+    a.href = url;
+    a.textContent = url;
+    el.append(a);
+    const caption = el.parentElement && el.parentElement.querySelector('.qr-method');
+    if (caption) caption.textContent = LINK_ONLY;
+  }
+
+  days.forEach(d => {
     const el = document.getElementById('qr-' + d);
     if (!el) return;
     const url = DAY_ROUTES[d];
@@ -704,18 +799,39 @@ setTheme(theme);
       const img = new Image(180, 180);
       img.alt = 'QR code for the day ' + d + ' route';
       img.loading = 'lazy';
-      img.onerror = () => el.remove();
+      // Fall back to the link rather than deleting the box — a removed QR
+      // leaves the caption claiming a QR that is not there.
+      img.onerror = () => linkOnly(el, url);
       img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data='
               + encodeURIComponent(url);
       el.append(img);
       method = 'QR served by api.qrserver.com — needs a connection';
+    } else {
+      linkOnly(el, url);
     }
   });
   document.querySelectorAll('.qr-method').forEach(n => n.textContent = method);
+  // A .qr container with no matching DAY_ROUTES entry would ship as an empty
+  // box. Nothing empty ships (§17) — the route button above it still stands.
+  document.querySelectorAll('.qr').forEach(el => {
+    if (!el.firstChild) el.remove();
+  });
 })();
 
 // Map. Guard it — a tile or CDN failure must not take the page with it.
 const mapStatus = document.getElementById('map-status');
+function setStatus(text) {
+  if (!mapStatus) return;
+  mapStatus.hidden = false;
+  mapStatus.textContent = text;
+}
+// Said out loud, not hidden: a stop with no coordinates has no pin, and the
+// traveller should know the map is not the full list.
+const unpinned = UNPLOTTED
+  ? UNPLOTTED + (UNPLOTTED > 1 ? ' stops have' : ' stop has')
+    + ' no coordinates and no pin — listed in full in the day cards below.'
+  : '';
+
 try {
   const map = L.map('map');
   const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -724,41 +840,60 @@ try {
 
   // Hide the status line once tiles actually arrive; if they never do, say so
   // rather than leaving "Loading map…" on screen for ever.
-  tiles.once('load', () => { mapStatus.hidden = true; });
+  let tilesLoaded = false;
+  tiles.once('load', () => {
+    tilesLoaded = true;
+    if (unpinned) setStatus(unpinned);
+    else if (mapStatus) mapStatus.hidden = true;
+  });
   setTimeout(() => {
-    if (!mapStatus.hidden) mapStatus.textContent =
-      'Map tiles unavailable — every stop below has an address and a directions link.';
+    if (!tilesLoaded) setStatus(
+      'Map tiles unavailable — every stop below has an address and a directions link.'
+      + (unpinned ? ' ' + unpinned : ''));
   }, 8000);
 
-  STOPS.forEach(s => {
-    const i = (s.day - 1) % DAY_COLOURS.length;
+  PLOTTABLE.forEach(s => {
+    const i = dayIndex(s);
     const c = DAY_COLOURS[i], ink = DAY_INK[i];
+    // Build the popup from the fields the itinerary actually carries. A missing
+    // price or URL must not print the word "undefined" at a traveller (§1).
+    const popup = [
+      s.url ? '<strong><a href="' + s.url + '">' + s.name + '</a></strong>'
+            : '<strong>' + s.name + '</strong>',
+      [s.type, s.time].filter(Boolean).join(' · '),
+      s.price,
+      s.mapsUrl ? '<a href="' + s.mapsUrl + '">Directions</a>' : ''
+    ].filter(Boolean).join('<br>');
     L.marker([s.lat, s.lng], { icon: L.divIcon({
       className: '', iconSize: [26,26], iconAnchor: [13,13],
       html: '<div class="pin" style="background:' + c + ';color:' + ink + '">'
-          + s.day + '</div>'
-    }), title: s.name }).addTo(map)
-     .bindPopup('<strong><a href="' + s.url + '">' + s.name + '</a></strong><br>'
-              + s.type + ' · ' + s.time + '<br>' + s.price
-              + '<br><a href="' + s.mapsUrl + '">Directions</a>');
+          + (Number(s.day) || 1) + '</div>'
+    }), title: s.name }).addTo(map).bindPopup(popup);
   });
 
   const byDay = {};
-  STOPS.forEach(s => (byDay[s.day] = byDay[s.day] || []).push([s.lat, s.lng]));
+  PLOTTABLE.forEach(s => {
+    const d = Number(s.day) || 1;
+    (byDay[d] = byDay[d] || []).push([s.lat, s.lng]);
+  });
   Object.keys(byDay).forEach(d => L.polyline(byDay[d], {
     color: DAY_COLOURS[(d - 1) % DAY_COLOURS.length],
     weight: 3, opacity: .8, dashArray: '8 5'
   }).addTo(map));
 
-  if (STOPS.length) map.fitBounds(L.latLngBounds(STOPS.map(s => [s.lat, s.lng])),
-                                  { padding: [36,36] });
-  else map.setView([0,0], 2);
+  // fitBounds on a single point snaps to maximum zoom, which lands the traveller
+  // on a street corner with no context. One stop gets a readable setView.
+  if (PLOTTABLE.length > 1) {
+    map.fitBounds(L.latLngBounds(PLOTTABLE.map(s => [s.lat, s.lng])), { padding: [36,36] });
+  } else if (PLOTTABLE.length === 1) {
+    map.setView([PLOTTABLE[0].lat, PLOTTABLE[0].lng], 14);
+  } else {
+    map.setView([0,0], 2);
+  }
 } catch (e) {
-  // Leaflet itself failed to load or throw. Report it on the status line, which
+  // Leaflet itself failed to load, or threw. Report it on the status line, which
   // sits outside #map, and leave the (empty) map box as a styled blank.
-  mapStatus.hidden = false;
-  mapStatus.textContent =
-    'Map unavailable — every stop below has an address and a directions link.';
+  setStatus('Map unavailable — every stop below has an address and a directions link.');
 }
 </script>
 </body>
@@ -832,17 +967,23 @@ confirm no day splits mid-stop and that the emergency block appears on all of th
   tiles and images blocked
 - Both schemes checked, including pin numerals on tiles — each numeral is the
   colour §4 pairs with its day, and each pairing clears 4.5:1
-- No placeholder left inside `#map`; the legend and every QR container are
-  populated or removed — nothing empty ships
+- No placeholder left inside `#map`; the legend is populated or removed, and
+  every QR container holds a code or the route URL as tappable text — nothing
+  empty ships
+- Any stop without coordinates still appears in full in its day card, is marked
+  there as unpinned, and the map status line says how many were left off. One
+  incomplete stop must not remove the markers, the routes or the bounds
 - Nothing overflows horizontally at 375px
 - Every interactive target clears 44px
 - Every phone number is a `tel:` link
 - Every stop has its sources disclosure
 - Every day card carries its day type, theme, energy, walking total and weather
-  note, and the two Tier 2 check results are on the page rather than assumed
+  note on the collapsed summary, and the two Tier 2 check results are on the page
+  rather than assumed
 - No hours stated as fact anywhere
 - No entry, visa or vaccination requirement stated as fact anywhere
 - Filename carries a version number, and it is higher than last time
-- Tell the traveller which QR method the page uses and what it depends on
+- Tell the traveller which QR method the page uses and what it depends on —
+  including when the answer is that there is no QR and the link is the fallback
 - If a printable version was asked for, §16 checked on paper: every disclosure
   open, URLs printed as text, one day per page, emergency block on every page

@@ -1,6 +1,6 @@
 ---
 name: pack-for-trip
-description: Build a packing list from the actual forecast and the actual itinerary, roughly 7–10 days before departure. Pulls the real forecast from the national meteorological service for the real dates and the real sequence of places, derives kit from what each day requires — hiking, boats, cold water, dress codes, fine dining, snow — and explains why every unusual item is on the list. Fires on "what should I pack", "packing list", "what to bring", "what's the weather going to be", "do I need a coat", "do I need hiking boots", "how cold will it be", "what should I wear", "help me pack", "am I forgetting anything". Fire on a soft match. Covers documents, medication, adapters, connectivity, and the cabin/hold split.
+description: Build a packing list from the actual forecast and the actual itinerary, roughly 7–10 days before departure. Pulls the real forecast from the national meteorological service for the real dates and the real sequence of places, derives kit from what each day requires — hiking, boats, cold water, dress codes, fine dining, snow — and explains why every unusual item is on the list. Fires on "what should I pack", "packing list", "what to bring", "what's the weather going to be", "do I need a coat", "do I need hiking boots", "how cold will it be", "what should I wear", "help me pack", "am I forgetting anything". A passing question about kit or weather is enough — do not wait for a clearer request. Covers documents, medication, adapters, connectivity, and the cabin/hold split.
 category: travel
 summary: Forecast-driven packing list derived from the itinerary, with a reason attached to every unusual item.
 ---
@@ -104,7 +104,8 @@ Passport, and the traveller's own check of its expiry against the destination's
 rule — link the official source, do not state the rule. Boarding passes,
 accommodation confirmations, booking references, driving licence and any permit the
 hire company requires, insurance policy number and the insurer's emergency line, a
-card the bank has been told about, local cash if the destination is cash-heavy.
+card the bank has been told about, and enough local notes to cover whatever that
+particular country still declines to take plastic for.
 Photograph the lot, store it somewhere reachable offline, leave a copy at home.
 
 ### Medication

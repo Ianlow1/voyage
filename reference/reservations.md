@@ -55,7 +55,7 @@ early costs nothing; booking on the short end costs the table.
 |---|---|---|---|---|---|---|---|
 | 1 | Travel insurance, both travellers | Some cover is keyed to how soon after the first trip payment the policy is bought | before any further payment | **now** | insurer, direct | `[OPEN]` | First payment was the flights, 3 Mar 2026. Buying in the UK. See § 5 |
 | 2 | Return flights LHR → OSL / BGO → LHR | Price ladder | 45 d | **Wed 29 Jul 2026** | airline, direct | `[DONE]` | Ref XK4PQ2. Hold luggage paid |
-| 3 | Maaemo, Oslo — dinner, day 2 | Books out at release | 90 d | **Mon 15 Jun 2026** | https://www.maaemo.no | `[LATE]` | Deadline gone. Backup: Hos Thea, #10 |
+| 3 | Maaemo, Oslo — dinner, day 2 | Books out at release | 90 d | **Mon 15 Jun 2026** | https://www.maaemo.no | `[LATE]` | Deadline gone. Backup: Hos Thea, which takes walk-ins and so carries no row of its own |
 | 4 | Bergensbanen Oslo S → Bergen, day 4 | Cheap fares are quota'd and seats are reserved | 90 d | **Wed 17 Jun 2026** | https://www.vy.no | `[LATE]` | Full-fare seats still available; cost moves to Annex B |
 | 5 | Nærøyfjord cruise, day 6 | Autumn timetable, limited sailings | 30 d | **Tue 18 Aug 2026** | operator, direct | `[OPEN]` | Weather-dependent. Operator cancels for wind; refund is full |
 | 6 | Troldhaugen recital, day 5 | Hall seating capped | 12 d | **Fri 4 Sep 2026** | https://kodebergen.no | `[OPEN]` | Season timetable changes in Sept — confirm the time |
@@ -103,11 +103,12 @@ they survive plain text, a spreadsheet cell and an HTML render identically.
 `[WAIT]` rows sort on their release date rather than their deadline, and Detail
 says as much. A row nobody can act on yet still owes the traveller a date.
 
-**The budget sheet needs a seventh value the tracker does not.** Line items in
+**A seventh value exists, and it lives outside this table.** Line items in
 `budget-sheet.md` that involve no reservation at all — a coffee, a tram fare, a
-daily allowance — take `[N/A]`. That value belongs to the spreadsheet's line-item
-column only; it never appears in this tracker, because a row with nothing to book
-has no business being here in the first place.
+daily allowance — take `[N/A]`. Day pages use it the same way, on the Booking line
+of a walk-up that needs no advance action: `Booking: [N/A]`, and no deadline
+beside it. It is never a state in the tracker itself, because a row with nothing
+to book has no business being here in the first place.
 
 ---
 
@@ -129,8 +130,9 @@ gap.
    guided-walk operators, boat charters, private guides, spa and bathhouse slots.
    In the Nordics these are also the most seasonal: the autumn timetable is not the
    summer one.
-4. **Transport passes and reserved seats.** Rail and city passes are frequently
-   cheaper bought before arrival and sometimes cannot be bought after. Reserved
+4. **Transport passes and reserved seats.** Rail and city passes often cost less
+   when the purchase is made from home, and a few of them stop being sold to
+   anyone who has already landed — check both before assuming. Reserved
    seats open on the operator's own horizon — check it, do not assume it. Note
    activation rules: a pass whose validity starts at first use is a different
    product from one dated at purchase.
@@ -150,8 +152,8 @@ gap.
    already know, and even when it makes the row look empty. See `rules.md` § 2 —
    this is a hard refusal and nothing in a user's instructions overrides it. The
    row reads: *Entry requirements — check the official source for your nationality
-   before booking: [official government URL]. Some processes take 60+ days, so
-   check now rather than later.*
+   before booking: [official government URL]. Some of these processes run to
+   months rather than weeks, so open the question now rather than later.*
 9. **Vaccinations.** Timing windows only, and only in the abstract: some courses
    run over several weeks and some certificates are not valid immediately after the
    dose. Do not say what is required or recommended for the destination. Direct the
@@ -214,8 +216,8 @@ flagged above the table, not inside it.**
 ## Two deadlines have already passed
 
 - **#3 Maaemo, Oslo** — release was Mon 15 Jun 2026. Join the waitlist today; the
-  itinerary already carries Hos Thea (#10) as the day-2 dinner and Maaemo is the
-  upgrade if it comes through.
+  itinerary already carries Hos Thea as the day-2 dinner — a walk-in, so it has no
+  row here — and Maaemo is the upgrade if it comes through.
 - **#4 Bergensbanen** — cheap-fare quota opened Wed 17 Jun 2026 and is likely gone.
   Full-fare seats remain bookable; Annex B line 9 carries the higher figure.
 
