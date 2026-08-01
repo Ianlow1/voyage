@@ -4,8 +4,11 @@
   "version": "0.1.0",
   "description": "Trip planning that checks its own work. Five skills — plan, research, audit, pack, replan — built on a shared verification ledger: every place carries an address, a primary source and an evidence date; every day is checked for whether it can physically be walked; every plan is scored against the constraints you actually stated. Research finishes before the itinerary is written, so venues can't be invented to fill a shape. Try: 'plan a week in Norway in September' or 'audit this itinerary'.",
   "author": {
-    "name": "Ian"
+    "name": "Ian",
+    "url": "https://github.com/ianlow1"
   },
+  "homepage": "https://github.com/ianlow1/voyage",
+  "repository": "https://github.com/ianlow1/voyage",
   "license": "MIT",
   "keywords": [
     "travel",

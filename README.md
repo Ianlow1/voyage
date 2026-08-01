@@ -91,7 +91,7 @@ It will never book anything. It will never write a URL it has not seen.
 ## Install
 
 ```bash
-/plugin marketplace add <this-repo>
+/plugin marketplace add ianlow1/voyage
 /plugin install voyage
 ```
 
